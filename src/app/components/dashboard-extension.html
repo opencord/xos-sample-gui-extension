@@ -1,0 +1,24 @@
+<div class="row">
+  <div class="col-xs-12">
+    <h1>Xos Sample GUI Dashboard Extension</h1>
+  </div>
+  <div class="col-xs-12">
+    <p>From our sample GUI extension module we are able to extend the dashboard.</p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-4">
+  To add a component to the dashboard you can invoke the <code>XosComponentInjector</code> service as in this example:
+  </div>
+  <div class="col-sm-8">
+    <pre>
+      XosComponentInjector.injectComponent(
+      '#dashboard-component-container',
+      'dashboardExtension',
+      {},
+      '',
+      false
+    );
+    </pre>
+  </div>
+</div>
