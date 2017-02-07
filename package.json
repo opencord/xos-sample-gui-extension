@@ -81,6 +81,7 @@
   },
   "scripts": {
     "postinstall": "npm run typings",
+    "prebuild": "npm install && npm install -g gulp && npm install -g typings",
     "build": "gulp",
     "start": "gulp serve",
     "typings": "typings install",

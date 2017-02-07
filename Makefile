@@ -22,3 +22,10 @@ rmi:
 
 enter:
 	docker exec -it $(CONTAINER_NAME) bash
+
+build_app:
+	docker run -d \
+        	--name $(CONTAINER_NAME)-builder \
+        	-v $(PWD):/usr/src/app \
+        	-v $(PWD)/minified:/usr/src/app/dist \
+        	-w /usr/src/app node:argon npm run build
