@@ -1,19 +1,20 @@
 # xos-sample-gui-extension
 
-## Demo
-
-To run this demo we suggest to setup `xos` using the `Vagrant` VM provided in the `fronted` configuration, but it is enabled for all the configuration.
-
-### Setup the extension container
-
-From any `service-profile` folder execute: `make xos_gui_sample_extension_c`
-
-> This command will build the container image (It is automatically triggered by the next command).
-
-### Onboard the GUI extension
-
-From any `service-profile` folder execute: `make ui-sample-extension`
-
 ## TODO:
 
 - [ ] Provide a dev environment
+
+## Platform install integration
+
+Having a profile deployed is required. To add extensions listed in your `profile-manifest` as:
+
+```
+enabled_gui_extensions:
+  - name: sample
+    path: orchestration/xos-sample-gui-extension
+```
+
+_NOTE: the `name` field must match the subdirectory specified in `conf/app/gulp.conf.js` (eg: `dist/extensions/sample`)_
+
+Execute: `ansible-playbook -i inventory/mock-rcord deploy-xos-gui-extensions-playbook.yml`
+_NOTE: remember to replate `inventory/**` with the actual `cord_profile` you are using_ 

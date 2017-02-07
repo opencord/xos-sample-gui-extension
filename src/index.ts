@@ -20,12 +20,12 @@ angular.module('xos-sample-gui-extension', [
   .run(function(
     $log: ng.ILogService,
     $state: ng.ui.IStateService,
-    NavigationService: any,
+    XosNavigationService: any,
     XosComponentInjector: any,
     XosKeyboardShortcut: any) {
     $log.info('[xos-sample-gui-extension] App is running');
 
-    NavigationService.add({
+    XosNavigationService.add({
       label: 'Example Extension',
       state: 'xos.xos-sample-gui-extension.example-route',
     });
