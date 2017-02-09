@@ -18,7 +18,7 @@ exports.ngModule = 'app';
  */
 exports.paths = {
   src: 'src',
-  dist: 'dist',
+  dist: 'dist/extensions/xos-sample-gui-extension',
   appConfig: 'conf/app',
   tmp: '.tmp',
   e2e: 'e2e',
