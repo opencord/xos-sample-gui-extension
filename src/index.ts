@@ -12,7 +12,7 @@ import {xosDashboardExtensionComponent} from './app/components/dashboard-extensi
 
 angular.module('xos-sample-gui-extension', [
     'ui.router',
-    'xosCore'
+    'app'
   ])
   .config(routesConfig)
   .component('demo', xosDemoComponent)
