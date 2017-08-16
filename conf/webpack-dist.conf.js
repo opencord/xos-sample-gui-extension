@@ -95,7 +95,7 @@ module.exports = {
   postcss: () => [autoprefixer],
   output: {
     path: path.join(process.cwd(), conf.paths.dist),
-    publicPath: "/spa/", // enable apache proxying on the head node
+    publicPath: "/xos/", // enable apache proxying on the head node
     filename: '[name].js'
   },
   resolve: {
