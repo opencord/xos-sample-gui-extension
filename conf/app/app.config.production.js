@@ -18,6 +18,6 @@
 
 angular.module('app')
   .constant('AppConfig', {
-    apiEndpoint: '/spa/api',
+    apiEndpoint: '/xos/api',
     websocketClient: '/'
   });
