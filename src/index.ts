@@ -57,7 +57,7 @@ angular.module('xos-sample-gui-extension', [
     );
 
     XosKeyboardShortcut.registerKeyBinding({
-        key: 'd',
+        key: 'p',
         description: 'Alert popup',
         cb: () => {
           alert('This binding is provided by the "xos-sample-gui-extension"');

@@ -33,7 +33,7 @@ class DemoComponent {
   }
 
   togglePanel() {
-    this.XosSidePanel.injectComponent('xosAlert', {config: {type: 'info'}, show: true}, 'This content is injected by my sample UI extension');
+    this.XosSidePanel.toggleComponent('xosAlert', {config: {type: 'info'}, show: true}, 'This content is being toggled by my sample UI extension!');
   }
 
 }
