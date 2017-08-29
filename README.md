@@ -50,7 +50,7 @@ new CopyWebpackPlugin([
       { from: `./conf/app/style.config.${brand}.js`, to: `style.config.js` },
       // add your file here
       { from: `./conf/app/customconfig.local.js`, to: `customconfig.js`}
-    ]),
+    ])
 ```
 
 `webpack.conf.js` will be used in a local development environment, such as when running `npm start`
@@ -66,9 +66,9 @@ Used to create custom navigation links in the left navigation panel.
 Provides easy access to model ngResources provided by an XOS service. Can be used as follows:
 
 ```typescript
-import {Subscription} from 'rxjs/Subscription;
+import {Subscription} from 'rxjs/Subscription';
 export class ExampleComponent {
-    static $inject = ['XosModelStore];
+    static $inject = ['XosModelStore'];
     public resource;
     private modelSubscription : Subscription;
     constructor(
@@ -101,4 +101,7 @@ service that can make development easier.
 
 #### XosSidePanel
 Makes the injection of a custom side panel somewhat easier (no need to specify a target)
+
+#### XosConfirm
+Allows for the creation of confirmation modal dialogs to confirm whether or not to execute a selected action.
 
