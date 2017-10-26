@@ -25,13 +25,13 @@ module.exports = function (config) {
     singleRun: false,
     autoWatch: true,
     logLevel: 'INFO',
-    junitReporter: {
-      outputDir: 'test-reports'
-    },
     browsers: [
       'PhantomJS',
       // 'Chrome'
     ],
+    browserConsoleLogOptions: {
+      level: 'log'
+    },
     frameworks: [
       'jasmine',
       'es6-shim'

@@ -23,7 +23,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const env = process.env.NODE_ENV || 'production';
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const brand = process.env.BRAND || 'cord';
 
 module.exports = {
@@ -45,12 +45,15 @@ module.exports = {
       },
       {
         test: /\.(css|scss)$/,
-        loaders: [
-          'style',
-          'css',
-          'sass',
-          'postcss'
-        ]
+        loaders: ExtractTextPlugin.extract({
+          fallbackLoader: 'style',
+          loader: [
+            'css',
+            'resolve-url-loader',
+            'sass?sourceMap',
+            'postcss'
+          ]
+        })
       },
       {
         test: /\.ts$/,
@@ -76,21 +79,22 @@ module.exports = {
   },
   plugins: [
     new CopyWebpackPlugin([
-      { from: `./conf/app/app.config.${env}.js`, to: `app.config.js` },
+      { from: `./conf/app/app.config.production.js`, to: `app.config.js` },
       { from: `./conf/app/style.config.${brand}.js`, to: `style.config.js` },
     ]),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.NoErrorsPlugin(),
     new HtmlWebpackPlugin({
       template: conf.path.src('index.html')
-    })
+    }),
+    new ExtractTextPlugin('index-[contenthash].css'),
   ],
   postcss: () => [autoprefixer],
   debug: true,
   devtool: 'source-map',
   output: {
     path: path.join(process.cwd(), conf.paths.tmp),
-    filename: 'index.js'
+    filename: '[name].js'
   },
   resolve: {
     extensions: [
@@ -101,7 +105,10 @@ module.exports = {
       '.ts'
     ]
   },
-  entry: `./${conf.path.src('index')}`,
+  entry: {
+    index: `./${conf.path.src('index')}`,
+    loader: `./${conf.path.src('/app/style/imports/loader.scss')}`
+  },
   ts: {
     configFileName: 'tsconfig.json'
   },

@@ -26,7 +26,6 @@ const pkg = require('../package.json');
 const autoprefixer = require('autoprefixer');
 const BaseHrefWebpackPlugin = require('base-href-webpack-plugin').BaseHrefWebpackPlugin;
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const env = process.env.NODE_ENV || 'production';
 const brand = process.env.BRAND || 'cord';
 
 module.exports = {
@@ -42,7 +41,7 @@ module.exports = {
         test: /\.(css|scss)$/,
         loaders: ExtractTextPlugin.extract({
           fallbackLoader: 'style',
-          loader: 'css?minimize!sass!postcss'
+          loader: 'css?minimize!resolve-url-loader!sass?sourceMap!postcss'
         })
       },
       {
@@ -69,7 +68,7 @@ module.exports = {
   },
   plugins: [
     new CopyWebpackPlugin([
-      { from: `./conf/app/app.config.${env}.js`, to: `app.config.js` },
+      { from: `./conf/app/app.config.production.js`, to: `app.config.js` },
       { from: `./conf/app/style.config.${brand}.js`, to: `style.config.js` },
     ]),
     new webpack.optimize.OccurrenceOrderPlugin(),
@@ -82,14 +81,14 @@ module.exports = {
       compress: {unused: true, dead_code: true, warnings: false}, // eslint-disable-line camelcase
       mangle: false // NOTE mangling was breaking the build
     }),
-    new ExtractTextPlugin('index-[contenthash].css'),
+    new ExtractTextPlugin('[name].css'),
     new webpack.optimize.CommonsChunkPlugin({name: 'vendor'}),
     new webpack.ProvidePlugin({
       $: "jquery",
       jQuery: "jquery"
     }),
     new BaseHrefWebpackPlugin({
-      baseHref: '/spa/'
+      baseHref: '/xos/'
     }),
   ],
   postcss: () => [autoprefixer],
@@ -105,11 +104,15 @@ module.exports = {
       '.web.js',
       '.js',
       '.ts'
-    ]
+    ],
+    alias: {
+      "ngprogress": path.resolve(__dirname, '../node_modules/ngprogress/build/ngProgress.js')
+    }
   },
   entry: {
     app: `./${conf.path.src('index')}`,
-    vendor: Object.keys(pkg.dependencies)
+    vendor: Object.keys(pkg.dependencies),
+    loader: `./${conf.path.src('/app/style/imports/loader.scss')}`
   },
   ts: {
     configFileName: 'tsconfig.json'
@@ -118,4 +121,3 @@ module.exports = {
     configuration: require('../tslint.json')
   }
 };
-

@@ -24,9 +24,9 @@ angular.module('app')
     payoff: 'Your OS resource manager',
     logo: 'opencloud-logo.png',
     routes: [
-        {
-            label: 'Slices',
-            state: 'xos.core.slices'
-        }
+      {
+        label: 'Slices',
+        state: 'xos.core.slice'
+      }
     ]
-});
+  });
